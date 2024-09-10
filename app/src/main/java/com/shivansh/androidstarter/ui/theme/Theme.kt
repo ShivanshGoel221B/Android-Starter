@@ -1,0 +1,81 @@
+package com.shivansh.androidstarter.ui.theme
+
+import android.os.Build
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.dynamicDarkColorScheme
+import androidx.compose.material3.dynamicLightColorScheme
+import androidx.compose.material3.lightColorScheme
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
+
+private val DarkColorScheme = with(DarkColors) {
+    darkColorScheme(
+        primary = primaryColor,
+        secondary = secondaryColor,
+        onPrimary = Color.White,
+        onPrimaryContainer = Color.White,
+        primaryContainer = primaryContainer,
+        inversePrimary = primaryInverse,
+        error = errorColor,
+        onError = Color.White,
+        background = backgroundColor,
+        onBackground = Color.White,
+        surface = surfaceColor,
+        surfaceContainer = surfaceContainerColor,
+        onSurface = Color.White,
+        tertiary = tertiaryColor
+    )
+}
+
+private val LightColorScheme = with(LightColors) {
+    lightColorScheme(
+        primary = primaryColor,
+        secondary = secondaryColor,
+        onPrimary = Color.White,
+        onPrimaryContainer = Color.Black,
+        primaryContainer = primaryContainer,
+        inversePrimary = primaryInverse,
+        error = errorColor,
+        onError = Color.White,
+        background = backgroundColor,
+        onBackground = Color.Black,
+        surface = surfaceColor,
+        surfaceContainer = surfaceContainerColor,
+        onSurface = Color.Black,
+        tertiary = tertiaryColor
+    )
+}
+
+@Composable
+fun AndroidStarterTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    // Dynamic color is available on Android 12+
+    dynamicColor: Boolean = true,
+    content: @Composable () -> Unit
+) {
+    val colorScheme = when {
+        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
+            val context = LocalContext.current
+            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+        }
+
+        darkTheme -> DarkColorScheme
+        else -> LightColorScheme
+    }
+
+    val uiController = rememberSystemUiController()
+    uiController.setStatusBarColor(
+        color = colorScheme.background,
+        darkIcons = false
+    )
+
+    MaterialTheme(
+        colorScheme = colorScheme,
+        typography = Typography,
+        content = content
+    )
+}
