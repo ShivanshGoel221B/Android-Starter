@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.shivansh.androidstarter.ui.theme.semiBold
 
 @Composable
 fun PrimaryButton(
@@ -28,7 +29,7 @@ fun PrimaryButton(
     ) {
         Text(
             text = buttonText,
-            style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.SemiBold)
+            style = MaterialTheme.typography.bodyLarge.semiBold
         )
     }
 }
@@ -51,7 +52,7 @@ fun PrimaryButtonOutlined(
     ) {
         Text(
             text = buttonText,
-            style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.SemiBold)
+            style = MaterialTheme.typography.bodyLarge.semiBold
         )
     }
 

@@ -1,6 +1,7 @@
 package com.shivansh.androidstarter.ui.theme
 
 import androidx.compose.material3.Typography
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -32,3 +33,13 @@ val Typography = Typography(
     )
     */
 )
+
+val TextStyle.semiBold
+    get() = copy(fontWeight = FontWeight.SemiBold)
+
+val TextStyle.bold
+    get() = copy(fontWeight = FontWeight.Bold)
+
+fun TextStyle.size(size: Int) = copy(fontSize = size.sp)
+
+fun TextStyle.color(color: Color) = copy(color = color)
